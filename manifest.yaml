@@ -1,8 +1,8 @@
 name: plugin-donathon-timer
 description: An plugin that implement countdown timer features for UniChat.
-version: 1.0.0-alpha.2
+version: 1.0.0-alpha.3
 author: Voguh
 license: EPL-2.0
-homepage: https://github.com/voguh/unichat-plugin-donathon-timer
+homepage: https://github.com/unichat-community/unichat-plugin-donathon-timer
 dependencies:
   - unichat@[1.4.0,)
