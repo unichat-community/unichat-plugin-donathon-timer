@@ -1,4 +1,4 @@
-name: main.yaml
+name: Release
 
 on:
   push:
@@ -34,7 +34,7 @@ jobs:
 
       - name: Check manifest version
         run: |
-          TAG_NAME="${GITHUB_REF#refs/tags/}"
+          TAG_NAME="${{ github.ref_name }}"
           MANIFEST_VERSION=$(yq e '.version' manifest.yaml)
           if [ "$MANIFEST_VERSION" != "$TAG_NAME" ]; then
             echo "Manifest version ($MANIFEST_VERSION) does not match tag name ($TAG_NAME)."
@@ -71,7 +71,7 @@ jobs:
           VERSION="$(yq e '.version' manifest.yaml)"
           ZIP_FILE="${PLUGIN_NAME}-${VERSION}.zip"
           if [[ "$VERSION" == *"-"* || "$VERSION" == *"+"* ]]; then
-            gh release create "$VERSION"./dist/* --prerelease
+            gh release create "$VERSION" "dist/$ZIP_FILE" --prerelease
           else
-            gh release create "$VERSION" ./dist/*
+            gh release create "$VERSION" "dist/$ZIP_FILE"
           fi
